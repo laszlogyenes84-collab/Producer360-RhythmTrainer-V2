@@ -1,0 +1,751 @@
+
+/* =========================================
+   PRODUCER360 – RITMUSKÖR V2
+   SÖTÉT TÉMA / ALAPDIZÁJN
+   ========================================= */
+
+:root {
+    --bg: #0c0912;
+    --panel: #191321;
+    --panel-soft: #21192b;
+    --border: #403047;
+
+    --text: #f8f2fb;
+    --muted: #a89aad;
+
+    --primary: #ef45b5;
+    --primary-hover: #ff6bca;
+
+    --cyan: #53dcf3;
+    --gold: #ffd166;
+
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #28162e 0%,
+            #140e1b 48%,
+            var(--bg) 100%
+        );
+
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 560px;
+    padding: 36px 20px 44px;
+    text-align: center;
+}
+
+/* FEJLÉC */
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--text);
+    letter-spacing: 3px;
+    font-size: clamp(26px, 6vw, 34px);
+    font-weight: 900;
+    margin: 0 0 10px;
+    text-shadow: 0 0 24px #ef45b530;
+}
+
+header h1::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 4px;
+    border-radius: 10px;
+    margin: 14px auto 0;
+    background: var(--primary);
+    box-shadow: 0 0 15px #ef45b570;
+}
+
+header p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* TEMPÓ */
+
+.settings {
+    margin: 24px 0;
+}
+
+.settings label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    color: var(--cyan);
+}
+
+.bpm-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+#bpm {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    width: 120px;
+    height: 52px;
+}
+
+#bpm:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.bpm-controls button {
+    flex: 0 0 50px;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    font-size: 26px;
+
+    color: var(--primary);
+    background: var(--panel-soft);
+    border: 1px solid var(--border);
+}
+
+.bpm-controls button:hover:not(:disabled) {
+    background: #38213d;
+    border-color: var(--primary);
+}
+
+#bpm-slider {
+    width: min(100%, 320px);
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+#bpm:disabled,
+#bpm-slider:disabled,
+.bpm-controls button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* HANGBEÁLLÍTÁSOK */
+
+.sound-settings {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin: 16px 0 30px;
+}
+
+.sound-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.sound-toggle input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.volume-control span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 1px;
+}
+
+#volume {
+    flex: 1;
+    min-width: 0;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+/* RITMUSKÖR */
+
+.game-area {
+    display: flex;
+    justify-content: center;
+    margin: 38px 0;
+}
+
+.circle {
+    width: min(75vw, 310px);
+    height: min(75vw, 310px);
+
+    border: 3px solid var(--cyan);
+    border-radius: 50%;
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle,
+            #221a2c 0%,
+            #100d18 80%
+        );
+
+    box-shadow:
+        0 0 25px #53dcf340,
+        0 0 60px #ef45b512,
+        inset 0 0 30px #53dcf315;
+}
+
+.circle::before {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    border: 1px dashed #65516f;
+    border-radius: 50%;
+    opacity: 0.65;
+}
+
+.target {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 20px;
+    height: 20px;
+    background: var(--gold);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 12px #ffd166,
+        0 0 24px #ffd16670;
+
+    z-index: 3;
+}
+
+.hand {
+    position: absolute;
+    width: 3px;
+    height: 43%;
+    left: calc(50% - 1.5px);
+    top: 7%;
+
+    background:
+        linear-gradient(
+            to top,
+            #2e8fa5,
+            #8bf4ff
+        );
+
+    transform-origin: center bottom;
+    transform: rotate(0deg);
+    box-shadow: 0 0 15px var(--cyan);
+}
+
+.center-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: #17111f;
+    padding: 16px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+#bpm-display {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text);
+}
+
+.center-info small {
+    color: var(--cyan);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* ÜTÉSVISSZAJELZÉS */
+
+.feedback {
+    margin: 24px 0;
+    min-height: 70px;
+}
+
+#timing {
+    font-size: clamp(23px, 5vw, 30px);
+    font-weight: 900;
+    color: var(--gold);
+}
+
+#accuracy {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* PONTSZÁMOK */
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 20px 12px;
+    margin: 26px 0;
+}
+
+.stats div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.stats small {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.stats strong {
+    font-size: 26px;
+    color: var(--gold);
+}
+
+/* GOMBOK */
+
+button {
+    border: none;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+    touch-action: manipulation;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+}
+
+.controls button {
+    flex: 1;
+    min-height: 56px;
+    padding: 16px 12px;
+}
+
+#start-btn {
+    background: var(--primary);
+    color: #160c19;
+}
+
+#start-btn:hover {
+    background: var(--primary-hover);
+}
+
+#tap-btn {
+    background: var(--cyan);
+    color: #08141a;
+}
+
+#tap-btn:hover:not(:disabled) {
+    background: #a1f5ff;
+}
+
+#tap-btn:disabled {
+    background: #39303e;
+    color: #817487;
+    cursor: not-allowed;
+}
+
+#tap-btn:not(:disabled):active {
+    background: #ffffff;
+}
+
+/* MENTÉS */
+
+.save-controls {
+    margin-top: 12px;
+}
+
+#save-btn {
+    width: 100%;
+    min-height: 54px;
+    padding: 14px;
+
+    background: var(--panel-soft);
+    color: var(--gold);
+    border: 1px solid var(--border);
+}
+
+#save-btn:hover:not(:disabled) {
+    background: #39263f;
+    border-color: var(--primary);
+}
+
+#save-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* REKORDOK */
+
+.records {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.records div {
+    flex: 1;
+    min-width: 0;
+
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    padding: 18px 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.records small {
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.records strong {
+    font-size: 23px;
+    color: var(--gold);
+}
+
+/* LÁBLÉC */
+
+footer {
+    margin-top: 34px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* MOBILNÉZET */
+
+@media (max-width: 420px) {
+    .game-container {
+        padding: 24px 14px 34px;
+    }
+
+    header h1 {
+        letter-spacing: 2px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .circle {
+        width: min(80vw, 300px);
+        height: min(80vw, 300px);
+    }
+
+    .stats {
+        padding: 16px 6px;
+    }
+
+    .stats small {
+        font-size: 9px;
+    }
+
+    .records {
+        gap: 8px;
+    }
+
+    .records div {
+        padding: 14px 7px;
+    }
+}
+
+/* =========================================
+   TÉMAVÁLTÓ – PRODUCER360
+   ========================================= */
+
+.theme-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+#theme-toggle {
+    padding: 10px 14px;
+    background: var(--panel-soft);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+#theme-toggle:hover {
+    border-color: var(--primary);
+}
+
+/* VILÁGOS TÉMA */
+
+body.light-theme {
+    --bg: #f7f4f8;
+    --panel: #ffffff;
+    --panel-soft: #f2eaf3;
+    --border: #ded1e0;
+
+    --text: #25162c;
+    --muted: #73657a;
+
+    --primary: #d92b9d;
+    --primary-hover: #ef55b6;
+
+    --cyan: #078fae;
+    --gold: #a66b00;
+
+    background: radial-gradient(
+        circle at 50% 40%,
+        #fff4fb 0%,
+        #f7f4f8 65%,
+        #f0edf3 100%
+    );
+}
+
+/* A világos téma ritmusköre */
+
+body.light-theme .circle {
+    background: radial-gradient(
+        circle,
+        #ffffff 0%,
+        #f3eaf5 80%
+    );
+
+    box-shadow:
+        0 0 22px #078fae25,
+        inset 0 0 25px #078fae12;
+}
+
+body.light-theme .center-info {
+    background: #ffffff;
+}
+
+body.light-theme #bpm {
+    background: #ffffff;
+}
+
+body.light-theme .bpm-controls button {
+    background: #f2eaf3;
+}
+
+body.light-theme .bpm-controls button:hover:not(:disabled) {
+    background: #ead8e9;
+}
+
+body.light-theme #tap-btn:disabled {
+    background: #e1d9e4;
+    color: #867b8b;
+}
+
+/* =========================================
+   NAPI BEMELEGÍTÉS – 5 FORDULÓ
+   ========================================= */
+
+.daily-challenge {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin: 24px 0;
+    text-align: left;
+}
+
+.challenge-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.challenge-heading span {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+}
+
+.challenge-heading strong {
+    font-size: 11px;
+    color: var(--text);
+}
+
+.round-progress {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.round-step {
+    height: 7px;
+    border-radius: 10px;
+    background: var(--border);
+}
+
+.round-step.active {
+    background: var(--primary);
+    box-shadow: 0 0 12px #ef45b560;
+}
+
+.round-step.completed {
+    background: var(--cyan);
+}
+
+.challenge-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.challenge-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.challenge-details small {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.challenge-details strong {
+    font-size: 20px;
+    color: var(--gold);
+}
+
+/* FORDULÓNKÉNTI EREDMÉNY */
+
+.round-result {
+    background: var(--panel);
+    border: 1px solid var(--primary);
+    border-radius: 14px;
+    padding: 20px 14px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.round-result[hidden] {
+    display: none;
+}
+
+.round-result h2 {
+    color: var(--primary);
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin: 0 0 18px;
+}
+
+.round-result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.round-result-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.round-result-stats small {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+.round-result-stats strong {
+    color: var(--gold);
+    font-size: 23px;
+}
+
+#round-next {
+    color: var(--cyan);
+    font-size: 12px;
+    margin: 20px 0 0;
+}

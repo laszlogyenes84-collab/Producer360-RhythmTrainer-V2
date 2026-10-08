@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer360 | Ritmuskör</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <main class="game-container">
+        
+<div class="theme-controls">
+    <button id="theme-toggle" type="button"
+            aria-label="Váltás világos témára">
+        ☀️ VILÁGOS MÓD
+    </button>
+</div>
+
+
+        <header>
+            <h1>RITMUSKÖR</h1>
+            <p>Érezd a ritmust. Találd el az ütemet!</p>
+        </header>
+
+<!-- PRODUCER360 NAPI KIHÍVÁS -->
+
+<section class="daily-challenge" id="daily-challenge">
+    <div class="challenge-heading">
+        <span>NAPI BEMELEGÍTÉS</span>
+        <strong id="round-display">1 / 5. FORDULÓ</strong>
+    </div>
+
+    <div class="round-progress" aria-label="Fordulók">
+        <span class="round-step active"></span>
+        <span class="round-step"></span>
+        <span class="round-step"></span>
+        <span class="round-step"></span>
+        <span class="round-step"></span>
+    </div>
+
+    <div class="challenge-details">
+        <div>
+            <small>ÜTEMEK</small>
+            <strong id="beat-progress">0 / 8</strong>
+        </div>
+        <div>
+            <small>NAPI PONTSZÁM</small>
+            <strong id="daily-score">0</strong>
+        </div>
+    </div>
+</section>
+
+        <section class="settings">
+            <label for="bpm">TEMPÓ (BPM)</label>
+
+            <div class="bpm-controls">
+                <button id="bpm-minus" type="button"
+                        aria-label="Tempó csökkentése">−</button>
+
+                <input type="number" id="bpm"
+                       min="40" max="150"
+                       step="1" value="120">
+
+                <button id="bpm-plus" type="button"
+                        aria-label="Tempó növelése">+</button>
+            </div>
+
+            <input type="range" id="bpm-slider"
+                   min="40" max="150"
+                   step="1" value="120"
+                   aria-label="Tempó beállítása">
+        </section>
+
+        <section class="sound-settings">
+            <label class="sound-toggle">
+                <input type="checkbox"
+                       id="sound-enabled" checked>
+                <span>METRONÓMHANG</span>
+            </label>
+
+            <div class="volume-control">
+                <span>HANGERŐ</span>
+                <input type="range" id="volume"
+                       min="0" max="100" value="35"
+                       aria-label="Metronóm hangereje">
+            </div>
+        </section>
+
+        <section class="game-area">
+            <div class="circle" id="circle">
+                <div class="target"></div>
+                <div class="hand" id="hand"></div>
+
+                <div class="center-info">
+                    <span id="bpm-display">120</span>
+                    <small>BPM</small>
+                </div>
+            </div>
+        </section>
+
+<!-- FORDULÓ EREDMÉNYE -->
+
+<section class="round-result" id="round-result" hidden>
+    <h2>FORDULÓ TELJESÍTVE!</h2>
+
+    <div class="round-result-stats">
+        <div>
+            <small>FORDULÓPONT</small>
+            <strong id="round-points">0</strong>
+        </div>
+
+        <div>
+            <small>TALÁLATOK</small>
+            <strong id="round-hits">0 / 8</strong>
+        </div>
+
+        <div>
+            <small>LEGJOBB ÜTÉS</small>
+            <strong id="round-best">—</strong>
+        </div>
+    </div>
+
+    <p id="round-next">Következő forduló...</p>
+</section>
+
+        <section class="feedback">
+            <div id="timing">KÉSZEN ÁLLSZ?</div>
+            <div id="accuracy">Nyomd meg az INDÍTÁS gombot!</div>
+        </section>
+
+        <section class="stats">
+            <div>
+                <small>PONTSZÁM</small>
+                <strong id="score">0</strong>
+            </div>
+
+            <div>
+                <small>SOROZAT</small>
+                <strong id="streak">0</strong>
+            </div>
+
+            <div>
+                <small>TALÁLATOK</small>
+                <strong id="hits">0</strong>
+            </div>
+        </section>
+
+        <section class="controls">
+            <button id="start-btn" type="button">
+                INDÍTÁS
+            </button>
+
+            <button id="tap-btn" type="button" disabled>
+                ÜTÉS / SPACE
+            </button>
+        </section>
+
+        <section class="save-controls">
+            <button id="save-btn" type="button" disabled>
+                MENTÉS ÉS LEÁLLÍTÁS
+            </button>
+        </section>
+
+        <section class="records">
+            <div>
+                <small>EGYMÁS UTÁNI HIBÁK</small>
+                <strong id="misses">0 / 3</strong>
+            </div>
+
+            <div>
+                <small>LEGJOBB MENTETT EREDMÉNY</small>
+                <strong id="best-score">0</strong>
+            </div>
+        </section>
+
+        <footer>
+            <p>A ritmusérzék gyakorlással fejlődik.</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
+
